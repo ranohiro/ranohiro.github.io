@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>週末の気分タイプ診断｜今行きたいスポットが見つかるプチ診断</title>
+  <title>週末の気分診断｜おすすめのおでかけスポットがわかるプチテスト</title>
   <style>
     :root {
       --primary: #334155;
       --accent: #f43f5e;
       --accent-soft: #fff1f2;
       --accent-text: #e11d48;
-      --bg: #f8fafc;
+      --bg: #f1f5f9;
       --card-bg: #ffffff;
       --text: #1e293b;
       --text-muted: #64748b;
@@ -27,7 +27,7 @@
     }
 
     body {
-      background: #f1f5f9;
+      background: var(--bg);
       color: var(--text);
       display: flex;
       justify-content: center;
@@ -78,11 +78,51 @@
       margin-bottom: 24px;
     }
 
+    /* 質問ナビゲーション（戻るボタン & ステップ表示） */
+    .quiz-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .btn-back {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 6px 8px;
+      margin-left: -8px;
+      border-radius: 8px;
+      transition: all 0.15s ease;
+    }
+
+    .btn-back:active {
+      background: #f1f5f9;
+      color: var(--text);
+    }
+
+    .btn-back svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .q-step {
+      font-size: 12px;
+      color: #94a3b8;
+      font-weight: 700;
+    }
+
     .progress-bar {
       height: 4px;
       background: #f1f5f9;
       border-radius: 2px;
-      margin-bottom: 18px;
+      margin-bottom: 20px;
       overflow: hidden;
     }
 
@@ -91,13 +131,6 @@
       background: #fb7185;
       width: 0%;
       transition: width 0.3s ease;
-    }
-
-    .q-step {
-      font-size: 12px;
-      color: #94a3b8;
-      font-weight: 700;
-      margin-bottom: 8px;
     }
 
     .q-text {
@@ -299,16 +332,24 @@
   <div id="screen-start" class="card">
     <span class="badge">WEEKEND MOOD</span>
     <h1>今週末の気分診断</h1>
-    <p class="sub">5つの直感クイズで、今の気分にぴったりな<br>東京のおでかけスポットが見つかります。</p>
-    <button class="btn-main" onclick="startQuiz()">診断をはじめる（約30秒）</button>
+    <p class="sub">5問の直感テストに答えると、<br>今の気分にぴったりなおでかけ先が分かります。</p>
+    <button class="btn-main" onclick="startQuiz()">診断をはじめる</button>
   </div>
 
   <!-- 質問画面 -->
   <div id="screen-quiz" class="card hidden">
+    <div class="quiz-nav">
+      <button class="btn-back" onclick="goBack()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+        <span>戻る</span>
+      </button>
+      <div id="q-step" class="q-step">Q1 / 5</div>
+    </div>
     <div class="progress-bar">
       <div id="progress" class="progress-fill"></div>
     </div>
-    <div id="q-step" class="q-step">Q1 / 5</div>
     <div id="q-text" class="q-text">質問テキスト</div>
     <div id="options" class="options"></div>
   </div>
@@ -352,7 +393,6 @@
   // artbar: Artbar Tokyo (アート・遊び心)
   // bbq: 豊洲ぐるり公園BBQ (開放感・自然体)
 
-  // 結末が予想しにくい直感クイズ（全5問）
   const questions = [
     {
       text: "カフェで席を選ぶなら、どこが一番落ち着く？",
@@ -456,9 +496,11 @@
 
   let currentQ = 0;
   let scores = { movie: 0, immersive: 0, dialogue: 0, artbar: 0, bbq: 0 };
+  let answerHistory = [];
 
   function startQuiz() {
     scores = { movie: 0, immersive: 0, dialogue: 0, artbar: 0, bbq: 0 };
+    answerHistory = [];
     currentQ = 0;
     document.getElementById("screen-start").classList.add("hidden");
     document.getElementById("screen-quiz").classList.remove("hidden");
@@ -492,6 +534,7 @@
   }
 
   function selectChoice(weights) {
+    answerHistory.push(weights);
     for (const [type, pts] of Object.entries(weights)) {
       scores[type] = (scores[type] || 0) + pts;
     }
@@ -502,6 +545,24 @@
     } else {
       document.getElementById("progress").style.width = "100%";
       showLoading();
+    }
+  }
+
+  function goBack() {
+    if (currentQ > 0) {
+      // 直前の回答を取り消して前の質問へ
+      const lastWeights = answerHistory.pop();
+      if (lastWeights) {
+        for (const [type, pts] of Object.entries(lastWeights)) {
+          scores[type] = (scores[type] || 0) - pts;
+        }
+      }
+      currentQ--;
+      showQuestion();
+    } else {
+      // Q1ならスタート画面に戻る
+      document.getElementById("screen-quiz").classList.add("hidden");
+      document.getElementById("screen-start").classList.remove("hidden");
     }
   }
 
@@ -562,7 +623,7 @@
 
     if (navigator.share) {
       navigator.share({
-        title: "週末の気分タイプ診断",
+        title: "週末の気分診断",
         text: shareText,
         url: "https://ranohiro.github.io/"
       }).catch(() => {
@@ -584,6 +645,7 @@
   function restart() {
     currentQ = 0;
     scores = { movie: 0, immersive: 0, dialogue: 0, artbar: 0, bbq: 0 };
+    answerHistory = [];
     document.getElementById("screen-result").classList.add("hidden");
     document.getElementById("screen-start").classList.remove("hidden");
   }
