@@ -3,31 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>週末の深層心理テスト｜あなたの心が本当に求める特効薬デート診断</title>
+  <title>週末の気分タイプ診断｜今行きたいスポットが見つかるプチ診断</title>
   <style>
     :root {
-      --primary: #2d3748;
-      --accent: #e06c75;
+      --primary: #334155;
+      --accent: #f43f5e;
       --accent-soft: #fff1f2;
-      --accent-deep: #be185d;
+      --accent-text: #e11d48;
       --bg: #f8fafc;
       --card-bg: #ffffff;
       --text: #1e293b;
       --text-muted: #64748b;
-      --border: #e2e8f0;
-      --radius: 20px;
+      --border: #f1f5f9;
+      --radius: 18px;
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Hiragino Sans", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
       -webkit-tap-highlight-color: transparent;
     }
 
     body {
-      background: linear-gradient(180deg, #f1f5f9 0%, #e2e8f0 100%);
+      background: #f1f5f9;
       color: var(--text);
       display: flex;
       justify-content: center;
@@ -37,42 +37,36 @@
 
     .container {
       width: 100%;
-      max-width: 460px;
+      max-width: 430px;
       margin: auto;
     }
 
     .card {
       background: var(--card-bg);
       border-radius: var(--radius);
-      padding: 32px 24px;
-      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+      padding: 30px 22px;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
       text-align: center;
       position: relative;
       overflow: hidden;
-      animation: fadeIn 0.35s ease;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
     }
 
     .badge {
       display: inline-block;
-      padding: 5px 14px;
+      padding: 4px 12px;
       background: var(--accent-soft);
-      color: var(--accent-deep);
+      color: var(--accent-text);
       border-radius: 999px;
       font-size: 11px;
       font-weight: 700;
-      letter-spacing: 0.08em;
-      margin-bottom: 14px;
+      letter-spacing: 0.06em;
+      margin-bottom: 12px;
     }
 
     h1 {
-      font-size: 21px;
+      font-size: 20px;
       line-height: 1.4;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       color: #0f172a;
       font-weight: 800;
     }
@@ -80,64 +74,36 @@
     p.sub {
       font-size: 13.5px;
       color: var(--text-muted);
-      line-height: 1.7;
-      margin-bottom: 24px;
-    }
-
-    .info-tags {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      margin-bottom: 24px;
-    }
-
-    .info-tag {
-      font-size: 11.5px;
-      color: #475569;
-      background: #f1f5f9;
-      padding: 4px 10px;
-      border-radius: 8px;
-    }
-
-    .progress-wrapper {
+      line-height: 1.6;
       margin-bottom: 24px;
     }
 
     .progress-bar {
-      height: 6px;
+      height: 4px;
       background: #f1f5f9;
-      border-radius: 3px;
+      border-radius: 2px;
+      margin-bottom: 18px;
       overflow: hidden;
-      margin-bottom: 8px;
     }
 
     .progress-fill {
       height: 100%;
-      background: linear-gradient(90deg, #f43f5e 0%, #fb7185 100%);
+      background: #fb7185;
       width: 0%;
-      transition: width 0.35s ease;
+      transition: width 0.3s ease;
     }
 
-    .progress-meta {
-      display: flex;
-      justify-content: space-between;
-      font-size: 11.5px;
-      color: var(--text-muted);
-      font-weight: 600;
-    }
-
-    .q-category {
+    .q-step {
       font-size: 12px;
-      color: var(--accent-deep);
+      color: #94a3b8;
       font-weight: 700;
-      letter-spacing: 0.05em;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
     }
 
     .q-text {
-      font-size: 17.5px;
-      font-weight: 800;
-      margin-bottom: 22px;
+      font-size: 16.5px;
+      font-weight: 700;
+      margin-bottom: 20px;
       line-height: 1.5;
       color: #0f172a;
     }
@@ -149,87 +115,69 @@
     }
 
     .opt-btn {
-      padding: 15px 16px;
+      padding: 14px 16px;
       background: #ffffff;
-      border: 1.5px solid var(--border);
-      border-radius: 14px;
-      color: #1e293b;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 12px;
+      color: var(--text);
       font-size: 13.5px;
-      line-height: 1.5;
+      line-height: 1.45;
       text-align: left;
       cursor: pointer;
-      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.15s ease;
       display: flex;
       align-items: center;
-      gap: 12px;
-    }
-
-    .opt-btn:hover {
-      border-color: #cbd5e1;
-      background: #f8fafc;
+      gap: 10px;
     }
 
     .opt-btn:active {
-      transform: scale(0.985);
-      border-color: #f43f5e;
+      transform: scale(0.99);
+      border-color: #fb7185;
       background: var(--accent-soft);
     }
 
-    .opt-letter {
+    .opt-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #cbd5e1;
       flex-shrink: 0;
-      width: 26px;
-      height: 26px;
-      border-radius: 8px;
-      background: #f1f5f9;
-      color: #64748b;
-      font-size: 12px;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
 
-    .opt-btn:active .opt-letter {
-      background: #f43f5e;
-      color: white;
+    .opt-btn:active .opt-dot {
+      background: #fb7185;
     }
 
     .btn-main {
       width: 100%;
-      padding: 16px;
-      background: #0f172a;
+      padding: 15px;
+      background: #1e293b;
       color: #ffffff;
       border: none;
-      border-radius: 14px;
-      font-size: 15px;
+      border-radius: 12px;
+      font-size: 14.5px;
       font-weight: 700;
       cursor: pointer;
-      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.15);
-      transition: all 0.2s;
-    }
-
-    .btn-main:hover {
-      background: #1e293b;
+      transition: opacity 0.2s;
     }
 
     .btn-main:active {
-      transform: scale(0.98);
-      opacity: 0.9;
+      opacity: 0.85;
     }
 
-    /* ローディング画面 */
+    /* ローディング演出 */
     .loading-box {
-      padding: 40px 10px;
+      padding: 36px 10px;
     }
 
     .spinner {
-      width: 48px;
-      height: 48px;
-      border: 4px solid #f1f5f9;
-      border-top-color: #f43f5e;
+      width: 36px;
+      height: 36px;
+      border: 3px solid #f1f5f9;
+      border-top-color: #fb7185;
       border-radius: 50%;
       animation: spin 0.8s linear infinite;
-      margin: 0 auto 20px;
+      margin: 0 auto 16px;
     }
 
     @keyframes spin {
@@ -237,132 +185,89 @@
     }
 
     .loading-text {
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 700;
-      color: #0f172a;
-      margin-bottom: 6px;
-    }
-
-    .loading-sub {
-      font-size: 12.5px;
-      color: var(--text-muted);
+      color: #334155;
     }
 
     /* 結果画面 */
-    .result-badge {
-      display: inline-block;
-      padding: 4px 12px;
-      background: #fdf2f8;
-      color: #be185d;
-      border-radius: 999px;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-      margin-bottom: 12px;
-    }
-
     .result-icon {
-      font-size: 46px;
-      margin-bottom: 8px;
-      line-height: 1;
-    }
-
-    .psychology-card {
-      background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-      border: 1px solid #e2e8f0;
-      border-radius: 14px;
-      padding: 16px;
-      margin-bottom: 20px;
-      text-align: left;
-    }
-
-    .psychology-label {
-      font-size: 11px;
-      color: #64748b;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      margin-bottom: 4px;
-    }
-
-    .psychology-type {
-      font-size: 17px;
-      font-weight: 800;
-      color: #0f172a;
+      font-size: 40px;
       margin-bottom: 8px;
     }
 
-    .psychology-desc {
+    .mood-type {
       font-size: 13px;
-      color: #334155;
-      line-height: 1.65;
-    }
-
-    .spot-card {
-      background: #ffffff;
-      border: 1.5px solid #fecdd3;
-      border-radius: 16px;
-      padding: 20px 18px;
-      margin-bottom: 20px;
-      text-align: left;
-      box-shadow: 0 4px 16px rgba(244, 63, 94, 0.06);
-    }
-
-    .spot-header {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 11.5px;
-      color: #e11d48;
+      color: var(--accent-text);
       font-weight: 700;
       margin-bottom: 6px;
     }
 
+    .mood-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .spot-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 18px 16px;
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    .spot-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: #64748b;
+      margin-bottom: 4px;
+    }
+
     .spot-title {
-      font-size: 19px;
+      font-size: 17.5px;
       font-weight: 800;
       color: #0f172a;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
       line-height: 1.35;
     }
 
     .spot-desc {
-      font-size: 13.5px;
+      font-size: 13px;
       color: #475569;
-      line-height: 1.7;
-      margin-bottom: 14px;
-    }
-
-    .tip-box {
-      background: #fff1f2;
-      border-radius: 10px;
-      padding: 12px 14px;
-      font-size: 12.5px;
-      color: #9f1239;
-      line-height: 1.55;
+      line-height: 1.6;
       margin-bottom: 12px;
     }
 
-    .tip-box strong {
-      display: block;
-      margin-bottom: 3px;
-      font-size: 11.5px;
-      color: #e11d48;
+    .spot-point {
+      background: #ffffff;
+      border: 1px solid #edf2f7;
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 12px;
+      color: #334155;
+      margin-bottom: 10px;
+    }
+
+    .spot-point strong {
+      color: var(--accent-text);
+      margin-right: 4px;
     }
 
     .result-tags {
       display: flex;
       flex-wrap: wrap;
-      gap: 6px;
+      gap: 5px;
     }
 
     .tag {
       font-size: 11px;
-      background: #f1f5f9;
-      padding: 3px 8px;
-      border-radius: 6px;
+      background: #e2e8f0;
+      padding: 2px 7px;
+      border-radius: 5px;
       color: #475569;
-      font-weight: 500;
     }
 
     .share-box {
@@ -373,19 +278,13 @@
 
     .btn-retry {
       background: transparent;
-      border: 1.5px solid #cbd5e1;
-      color: #64748b;
-      padding: 13px;
-      border-radius: 14px;
-      font-size: 13.5px;
+      border: 1px solid #cbd5e1;
+      color: var(--text-muted);
+      padding: 12px;
+      border-radius: 12px;
+      font-size: 13px;
       font-weight: 600;
       cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .btn-retry:hover {
-      background: #f8fafc;
-      color: #334155;
     }
 
     .hidden {
@@ -398,69 +297,48 @@
 <div class="container">
   <!-- スタート画面 -->
   <div id="screen-start" class="card">
-    <span class="badge">PSYCHOLOGICAL TEST</span>
-    <h1>週末の深層心理テスト</h1>
-    <p class="sub">直感で選ぶ5つの質問。<br>無意識の選択から「今のあなたの心のバロメーター」と、週末に一番心が満たされる特効薬デートスポットを導き出します。</p>
-    <div class="info-tags">
-      <span class="info-tag">⏱ 所要時間 約45秒</span>
-      <span class="info-tag">🎯 全5問</span>
-      <span class="info-tag">✨ 結末予測不能</span>
-    </div>
-    <button class="btn-main" onclick="startQuiz()">テストをはじめる</button>
+    <span class="badge">WEEKEND MOOD</span>
+    <h1>今週末の気分診断</h1>
+    <p class="sub">5つの直感クイズで、今の気分にぴったりな<br>東京のおでかけスポットが見つかります。</p>
+    <button class="btn-main" onclick="startQuiz()">診断をはじめる（約30秒）</button>
   </div>
 
   <!-- 質問画面 -->
   <div id="screen-quiz" class="card hidden">
-    <div class="progress-wrapper">
-      <div class="progress-bar">
-        <div id="progress" class="progress-fill"></div>
-      </div>
-      <div class="progress-meta">
-        <span id="q-category" class="q-category">質問カテゴリ</span>
-        <span id="q-counter">1 / 5</span>
-      </div>
+    <div class="progress-bar">
+      <div id="progress" class="progress-fill"></div>
     </div>
+    <div id="q-step" class="q-step">Q1 / 5</div>
     <div id="q-text" class="q-text">質問テキスト</div>
     <div id="options" class="options"></div>
   </div>
 
-  <!-- ローディング演出画面 -->
+  <!-- ローディング画面 -->
   <div id="screen-loading" class="card hidden">
     <div class="loading-box">
       <div class="spinner"></div>
-      <div class="loading-text">深層心理を分析中...</div>
-      <div class="loading-sub">あなたの潜在的な願望と処方箋スポットを照合しています</div>
+      <div class="loading-text">ぴったりのスポットを探しています...</div>
     </div>
   </div>
 
   <!-- 結果画面 -->
   <div id="screen-result" class="card hidden">
-    <span class="result-badge">DIAGNOSIS RESULT</span>
     <div id="res-icon" class="result-icon">✨</div>
-    
-    <!-- 心理分析パート -->
-    <div class="psychology-card">
-      <div class="psychology-label">あなたの今の深層心理</div>
-      <div id="psy-type" class="psychology-type">タイプ名</div>
-      <div id="psy-desc" class="psychology-desc">解説文</div>
-    </div>
+    <div id="mood-type" class="mood-type">気分タイプ</div>
+    <p id="mood-desc" class="mood-desc">解説テキスト</p>
 
-    <!-- 処方箋スポットパート -->
-    <div class="spot-card">
-      <div class="spot-header">
-        <span>💊</span> 今のあなたに効く処方箋スポット
-      </div>
-      <div id="res-title" class="spot-title">スポット名</div>
-      <div id="res-desc" class="spot-desc">スポット解説</div>
-      <div class="tip-box">
-        <strong>💡 デートの親密度UPアドバイス</strong>
-        <span id="res-tip">アドバイス</span>
+    <div class="spot-box">
+      <div class="spot-label">おすすめスポット</div>
+      <div id="spot-title" class="spot-title">スポット名</div>
+      <div id="spot-desc" class="spot-desc">スポット説明</div>
+      <div class="spot-point">
+        <strong>Point</strong><span id="spot-point-text">見どころ</span>
       </div>
       <div id="res-tags" class="result-tags"></div>
     </div>
 
     <div class="share-box">
-      <button class="btn-main" onclick="copyResult()">この結果を共有する（コピー）</button>
+      <button class="btn-main" onclick="copyResult()">結果を共有する（LINE等）</button>
       <button class="btn-retry" onclick="restart()">もう一度診断する</button>
     </div>
   </div>
@@ -468,69 +346,62 @@
 
 <script>
   // 5つの行き先タイプ
-  // movie: 109シネマズプレミアム新宿 (ラグジュアリー・浸る)
-  // immersive: イマーシブ・フォート東京 (刺激・冒険)
-  // dialogue: ダイアログ・イン・ザ・ダーク (静寂・本質)
-  // artbar: Artbar Tokyo (創造・遊び心)
+  // movie: 109シネマズプレミアム新宿 (ゆったり贅沢)
+  // immersive: イマーシブ・フォート東京 (刺激・非日常)
+  // dialogue: ダイアログ・イン・ザ・ダーク (静寂・感覚)
+  // artbar: Artbar Tokyo (アート・遊び心)
   // bbq: 豊洲ぐるり公園BBQ (開放感・自然体)
 
-  // 全5問：一見デート先とは結びつかない日常行動・直感の心理クイズ
-  // 多面配点（第一候補 +2pt, 親和性の高い第二候補 +1pt）により、
-  // 3問時代の「同点で割れる」問題を完全に解消し、自然なグラデーションで結果を判定
+  // 結末が予想しにくい直感クイズ（全5問）
   const questions = [
     {
-      category: "Q1. 無意識の居場所",
-      text: "お気に入りのカフェに入ったとき、無意識に一番惹かれる席は？",
+      text: "カフェで席を選ぶなら、どこが一番落ち着く？",
       choices: [
-        { text: "外の風と街の気配を感じられる、明るいテラス席", weights: { bbq: 2, artbar: 1 } },
-        { text: "ふかふかのソファがある、落ち着いた奥まった角の席", weights: { movie: 2, dialogue: 1 } },
-        { text: "照明が控えめで、静かに自分の世界に入れる半個室", weights: { dialogue: 2, movie: 1 } },
-        { text: "本やアートが並び、センスを刺激される棚の近く", weights: { artbar: 2, immersive: 1 } },
-        { text: "人通りや店内の動きがよく見える、見晴らしのいい席", weights: { immersive: 2, bbq: 1 } }
+        { text: "外の風を感じられるオープンテラス", weights: { bbq: 2, artbar: 1 } },
+        { text: "ソファのある落ち着いた奥の角席", weights: { movie: 2, dialogue: 1 } },
+        { text: "照明控えめで静かな半個室", weights: { dialogue: 2, movie: 1 } },
+        { text: "本や雑貨が並ぶ棚の近くの席", weights: { artbar: 2, immersive: 1 } },
+        { text: "街の様子がよく見える窓際席", weights: { immersive: 2, bbq: 1 } }
       ]
     },
     {
-      category: "Q2. 秘密の贈り物",
-      text: "旅先のアンティークショップで、店主が『今のあなたへ』と差し出してきた小箱。中身は？",
+      text: "旅先の雑貨屋さんで、ふと目に留まったアイテムは？",
       choices: [
-        { text: "澄んだ音色で心をほどく、小さな真鍮のオルゴール", weights: { movie: 2, dialogue: 1 } },
-        { text: "光に透かすと万華鏡のように色が変わるガラス玉", weights: { artbar: 2, bbq: 1 } },
-        { text: "秘密の扉のありかが記された、古びた地図と鍵", weights: { immersive: 2, artbar: 1 } },
-        { text: "触れるとほんのり温かい、光を吸い込む漆黒の天然石", weights: { dialogue: 2, movie: 1 } },
-        { text: "森の深呼吸を閉じ込めたような、芳しいハーブのサシェ", weights: { bbq: 2, dialogue: 1 } }
+        { text: "優しい音色の小さなオルゴール", weights: { movie: 2, dialogue: 1 } },
+        { text: "光にかざすと綺麗なガラス玉", weights: { artbar: 2, bbq: 1 } },
+        { text: "アンティークの真鍮の鍵", weights: { immersive: 2, artbar: 1 } },
+        { text: "深い色合いの丸い天然石", weights: { dialogue: 2, movie: 1 } },
+        { text: "いい香りがするハーブサシェ", weights: { bbq: 2, dialogue: 1 } }
       ]
     },
     {
-      category: "Q3. 心の充電スイッチ",
-      text: "一週間頑張ったあと、『あ、私エネルギー回復してる！』と実感する瞬間は？",
+      text: "忙しい1週間が終わった夜、一番ホッとする瞬間は？",
       choices: [
-        { text: "誰にも邪魔されず、上質で美しい世界観にどっぷり浸ったとき", weights: { movie: 2, dialogue: 1 } },
-        { text: "思いがけないハプニングや、刺激的な展開にドキドキしたとき", weights: { immersive: 2, bbq: 1 } },
-        { text: "静かな空間で、大切な人と飾らない本音をじっくり交わしたとき", weights: { dialogue: 2, movie: 1 } },
-        { text: "手を動かして何かを作ったり、思いつきで創作に没頭したとき", weights: { artbar: 2, immersive: 1 } },
-        { text: "澄んだ空気の中で、美味しいものを頬張って笑い合ったとき", weights: { bbq: 2, artbar: 1 } }
+        { text: "上質な映画や作品の世界に浸っているとき", weights: { movie: 2, dialogue: 1 } },
+        { text: "予想外の面白い展開や動画に出会ったとき", weights: { immersive: 2, bbq: 1 } },
+        { text: "静かな部屋で、好きな音楽を聴いているとき", weights: { dialogue: 2, movie: 1 } },
+        { text: "思い立って何かを作ったり描いたりするとき", weights: { artbar: 2, immersive: 1 } },
+        { text: "美味しいごはんを食べてお腹いっぱいになったとき", weights: { bbq: 2, artbar: 1 } }
       ]
     },
     {
-      category: "Q4. ふたりの心地いい距離",
-      text: "ふたりで過ごすとき、一番『心が通じ合えた』と温かくなる瞬間は？",
+      text: "誰かと一緒に過ごすとき、心地いいなと感じる時間は？",
       choices: [
-        { text: "言葉がなくても、同じ空気を心地よく共有できる穏やかな沈黙", weights: { dialogue: 2, movie: 1 } },
-        { text: "『これ見て！』とお互いの感性を共有して、一緒にワクワクした瞬間", weights: { artbar: 2, immersive: 1 } },
-        { text: "一緒に未知のハプニングに挑んで、共犯者のようになれた瞬間", weights: { immersive: 2, bbq: 1 } },
-        { text: "特別感のある空間で、お互いを大切に思い合える贅沢な時間", weights: { movie: 2, dialogue: 1 } },
-        { text: "気取らない素の表情で、肩の力を抜いて思いっきりくつろげたとき", weights: { bbq: 2, artbar: 1 } }
+        { text: "言葉がなくても気まずくない、穏やかな沈黙", weights: { dialogue: 2, movie: 1 } },
+        { text: "「これ見て！」とお互いの好みを共有する時間", weights: { artbar: 2, immersive: 1 } },
+        { text: "初めての体験に一緒にワクワクしている時間", weights: { immersive: 2, bbq: 1 } },
+        { text: "ちょっと特別な空間で、ゆったりくつろぐ時間", weights: { movie: 2, dialogue: 1 } },
+        { text: "気取らず自然体で、たくさん笑い合える時間", weights: { bbq: 2, artbar: 1 } }
       ]
     },
     {
-      category: "Q5. 魔法の切符",
-      text: "もし今、どこへでも行ける『魔法の切符』を1枚もらえるなら？",
+      text: "もし「どこでも行けるチケット」をもらえたら？",
       choices: [
-        { text: "水辺の風がそよぎ、炭火の温かい灯りが揺れるウッドデッキ", weights: { bbq: 2, dialogue: 1 } },
-        { text: "一切の雑音も光もない、宇宙の真ん中に浮かんでいるような無音の部屋", weights: { dialogue: 2, movie: 1 } },
-        { text: "別の時代や映画のワンシーンに迷い込める、秘密の劇場", weights: { immersive: 2, artbar: 1 } },
-        { text: "美酒と絵の具の香りが漂う、感性豊かなアーティストの隠れ家", weights: { artbar: 2, movie: 1 } },
-        { text: "最高峰の音響と極上のシートが包み込む、VIPラウンジ", weights: { movie: 2, immersive: 1 } }
+        { text: "水辺の風が心地いいテラスデッキ", weights: { bbq: 2, dialogue: 1 } },
+        { text: "雑音のない静かな星空の下", weights: { dialogue: 2, movie: 1 } },
+        { text: "映画の世界に入り込める秘密のシアター", weights: { immersive: 2, artbar: 1 } },
+        { text: "お酒と絵の具が並ぶおしゃれなアトリエ", weights: { artbar: 2, movie: 1 } },
+        { text: "ふかふかソファのプレミアムラウンジ", weights: { movie: 2, immersive: 1 } }
       ]
     }
   ];
@@ -538,54 +409,53 @@
   const results = {
     movie: {
       icon: "🎬",
-      psyType: "【感性の調律者】上質な安らぎを求める美意識派",
-      psyDesc: "日々の忙しさや雑音で、あなたの繊細なアンテナは少しお疲れ気味。無理にテンションを上げるより、自分の五感を丁寧に満たしてくれる『本物の世界観』と『落ち着いた贅沢』に身を委ねたい状態です。",
+      moodType: "【ゆったり贅沢気分】",
+      moodDesc: "今週末は、少し落ち着いて上質な世界観に浸りたい気分。日常の忙しさを忘れて、心地よい空間でリラックスするのがおすすめです。",
       title: "109シネマズプレミアム新宿",
-      desc: "最高峰の音響（坂本龍一氏監修）と全席プレミアムシートで味わう、極上の映画デート。上映前の専用ラウンジやウェルカムコンセッションも含め、映画館の概念を超える特別な安らぎ時間が過ごせます。",
-      tip: "上映前のラウンジでドリンクを片手に、最近の小さな出来事をゆったり語り合ってみて。静かな特別感がふたりの距離を自然に縮めます。",
-      tags: ["#全席プレミアム", "#坂本龍一音響監修", "#専用ラウンジ", "#大人の新宿デート"]
+      desc: "坂本龍一氏監修の最高峰音響と、全席プレミアムシートが揃う映画館。専用ラウンジでドリンクを楽しみながら、贅沢な映画体験が味わえます。",
+      point: "上映前の専用ラウンジでゆったり過ごせます",
+      tags: ["#プレミアムシート", "#音響最高峰", "#新宿", "#落ち着く空間"]
     },
     immersive: {
       icon: "🎭",
-      psyType: "【日常の脱出者】ドラマと共犯関係を求める冒険派",
-      psyDesc: "ルーティン化した日々に物足りなさを感じていませんか？今のあなたの心は、理屈を超えたドキドキや、誰かと一緒に『事件やハプニング』を共有して感情を揺さぶられたいエネルギーで溢れています。",
+      moodType: "【ワクワク・刺激気分】",
+      moodDesc: "今週末は、いつもの日常から抜け出してドキドキしたい気分！思いがけない展開や新しい体験に飛び込むと、一気にリフレッシュできそうです。",
       title: "イマーシブ・フォート東京",
-      desc: "完全没入型の世界初テーマパーク！観客ではなく物語の登場人物として施設を歩き回り、サスペンスや謎解きを肌で体験。2人で協力しながらハラハラを共有できる、強烈な記憶に残る体験型デートになります。",
-      tip: "『次どこ行く！？』とリードし合う共犯者気分を楽しんで。体験後にカフェで互いの視点の答え合わせをすると会話が最高潮に盛り上がります。",
-      tags: ["#没入型テーマパーク", "#共犯者デート", "#ハラハラ体験", "#お台場"]
+      desc: "物語の登場人物として世界観に入り込める完全没入型テーマパーク。歩き回りながらサスペンスや謎解きを体験できる、新感覚のスポットです。",
+      point: "2人でハラハラを共有できて会話が盛り上がります",
+      tags: ["#没入型エンタメ", "#お台場", "#体験型", "#非日常"]
     },
     dialogue: {
       icon: "🕯️",
-      psyType: "【静寂の探求者】本質とディープな繋がりを求める直感派",
-      psyDesc: "SNSやスマホの画面、表面的な会話に少し食傷気味。視覚や情報に頼らず、相手の『声の温度』や『心の気配』だけで深く通じ合いたいという、ピュアで濃密なコミュニケーションを求めています。",
+      moodType: "【静けさ・感覚リフレッシュ気分】",
+      moodDesc: "画面や情報から少し離れて、感覚を研ぎ澄ましたい気分。静かな環境で誰かと落ち着いた時間を過ごすと、心が軽くなりそうです。",
       title: "ダイアログ・イン・ザ・ダーク",
-      desc: "光を完全に遮断した純度100%の暗闇の中で、手探りと声だけで進む体験。普段意識しない五感が一気に研ぎ澄まされ、相手の声や手のぬくもりが驚くほど鮮明に感じられる、唯一無二のディープな対話が生まれます。",
-      tip: "暗闇の中では自然と手を取り合ったり声を掛け合ったりすることになります。体験が終わった後、相手の表情がいつもより愛おしく見えるはず。",
-      tags: ["#完全な暗闇", "#五感の再発見", "#声とぬくもり", "#竹芝"]
+      desc: "純度100%の暗闇の中を、声や手探りで進む体験。普段使わない感覚が研ぎ澄まされ、相手の声のトーンや存在感が温かく感じられます。",
+      point: "普段と全く違う特別な会話が生まれます",
+      tags: ["#完全な暗闇", "#五感の体験", "#竹芝", "#不思議な感覚"]
     },
     artbar: {
       icon: "🎨",
-      psyType: "【ひらめきクリエイター】遊び心と自己解放を求める感覚派",
-      psyDesc: "頭で考えることが多すぎて、右脳（感性や遊び心）がうずうずしています！正解のない世界で自由に自分を表現し、お酒の力も少し借りて、普段は見せない子供のような笑顔を取り戻したいサインです。",
+      moodType: "【クリエイティブ・遊び心気分】",
+      moodDesc: "今週末は、頭を空っぽにして自由に楽しみたい気分！ちょっとしたお酒やものづくりなど、気取らずに笑い合える時間がぴったりです。",
       title: "Artbar Tokyo",
-      desc: "ワインやお酒を片手に、キャンバスに向かって自由にペイントを楽しむ大人のアトリエ体験。絵心がなくてもインストラクターが優しくサポート。お互いの意外な色彩感覚やセンスを覗き合えるクリエイティブなデートです。",
-      tip: "お互いの絵を『ここセンスいいね！』と褒め合ってみて。完成したキャンバスを部屋に飾れば、見るたびに楽しい思い出が蘇ります。",
-      tags: ["#ワイン片手にアート", "#手ぶらOK", "#大人の遊び場", "#代官山"]
+      desc: "ワインやドリンクを片手に、キャンバスに絵を描くアトリエ体験。絵が上手でなくても気軽に楽しめて、描いた作品はそのまま持ち帰れます。",
+      point: "ワインを飲みながら手ぶらで楽しめます",
+      tags: ["#ワイン片手にアート", "#代官山", "#手ぶらOK", "#おしゃれアトリエ"]
     },
     bbq: {
       icon: "🍖",
-      psyType: "【自然体のヒーラー】開放感と素直な笑顔を求めるリフレッシュ派",
-      psyDesc: "窮屈な場所や気取った振る舞いから抜け出し、深呼吸したい気分。広い空と風を感じながら、肩肘張らずに笑い合える時間を欲しています。美味しいものを一緒にシェアする素朴な幸せが最大の癒やしです。",
+      moodType: "【開放感・リフレッシュ気分】",
+      moodDesc: "広い空の下で、深呼吸してのんびり過ごしたい気分。美味しいものを食べながら、肩の力を抜いて過ごすのが一番のパワーチャージです。",
       title: "豊洲ぐるり公園 手ぶらBBQ",
-      desc: "海風を感じるウォーターフロントで、準備・片付け不要の手ぶらバーベキュー。都会のパノラマビューを眺めながら、リラックスした開放的な空間で美味しいお肉と飾らない会話を楽しめます。",
-      tip: "お肉を焼きながら気取らないトークを楽しんで。『外で食べるとやっぱり美味しいね』の一言が、一番のリラックスをもたらします。",
-      tags: ["#手ぶらBBQ", "#海沿いロケーション", "#開放感100%", "#豊洲"]
+      desc: "海風が気持ちいいウォーターフロントで楽しめる、準備・片付け不要のバーベキュー。開放感ある景色を眺めながら、気楽に美味しいごはんを楽しめます。",
+      point: "手ぶらで行けて景色も抜群です",
+      tags: ["#手ぶらBBQ", "#海沿い", "#豊洲", "#開放感"]
     }
   };
 
   let currentQ = 0;
   let scores = { movie: 0, immersive: 0, dialogue: 0, artbar: 0, bbq: 0 };
-  const letters = ["A", "B", "C", "D", "E"];
 
   function startQuiz() {
     scores = { movie: 0, immersive: 0, dialogue: 0, artbar: 0, bbq: 0 };
@@ -597,34 +467,31 @@
 
   function showQuestion() {
     const q = questions[currentQ];
-    document.getElementById("q-category").innerText = q.category;
-    document.getElementById("q-counter").innerText = `${currentQ + 1} / ${questions.length}`;
+    document.getElementById("q-step").innerText = `Q${currentQ + 1} / ${questions.length}`;
     document.getElementById("q-text").innerText = q.text;
     document.getElementById("progress").style.width = `${((currentQ) / questions.length) * 100}%`;
 
     const optionsContainer = document.getElementById("options");
     optionsContainer.innerHTML = "";
 
-    q.choices.forEach((c, idx) => {
+    q.choices.forEach(c => {
       const btn = document.createElement("button");
       btn.className = "opt-btn";
       
-      const letterSpan = document.createElement("span");
-      letterSpan.className = "opt-letter";
-      letterSpan.innerText = letters[idx];
+      const dot = document.createElement("span");
+      dot.className = "opt-dot";
 
-      const textSpan = document.createElement("span");
-      textSpan.innerText = c.text;
+      const text = document.createElement("span");
+      text.innerText = c.text;
 
-      btn.appendChild(letterSpan);
-      btn.appendChild(textSpan);
+      btn.appendChild(dot);
+      btn.appendChild(text);
       btn.onclick = () => selectChoice(c.weights);
       optionsContainer.appendChild(btn);
     });
   }
 
   function selectChoice(weights) {
-    // 選択された配点を加算
     for (const [type, pts] of Object.entries(weights)) {
       scores[type] = (scores[type] || 0) + pts;
     }
@@ -642,17 +509,15 @@
     document.getElementById("screen-quiz").classList.add("hidden");
     document.getElementById("screen-loading").classList.remove("hidden");
 
-    // 心理テストらしい演出として約1秒ローディング
     setTimeout(() => {
       document.getElementById("screen-loading").classList.add("hidden");
       showResult();
-    }, 1100);
+    }, 800);
   }
 
   function showResult() {
     document.getElementById("screen-result").classList.remove("hidden");
 
-    // 最高スコアを判定
     let topType = "movie";
     let maxScore = -1;
     let candidateTypes = [];
@@ -667,7 +532,6 @@
       }
     }
 
-    // 万が一完全同点だった場合は、候補の中からランダムに決定して偏りを防ぐ
     if (candidateTypes.length > 1) {
       const randIdx = Math.floor(Math.random() * candidateTypes.length);
       topType = candidateTypes[randIdx];
@@ -675,11 +539,11 @@
 
     const res = results[topType];
     document.getElementById("res-icon").innerText = res.icon;
-    document.getElementById("psy-type").innerText = res.psyType;
-    document.getElementById("psy-desc").innerText = res.psyDesc;
-    document.getElementById("res-title").innerText = res.title;
-    document.getElementById("res-desc").innerText = res.desc;
-    document.getElementById("res-tip").innerText = res.tip;
+    document.getElementById("mood-type").innerText = res.moodType;
+    document.getElementById("mood-desc").innerText = res.moodDesc;
+    document.getElementById("spot-title").innerText = res.title;
+    document.getElementById("spot-desc").innerText = res.desc;
+    document.getElementById("spot-point-text").innerText = res.point;
 
     const tagsContainer = document.getElementById("res-tags");
     tagsContainer.innerHTML = "";
@@ -692,13 +556,13 @@
   }
 
   function copyResult() {
-    const psy = document.getElementById("psy-type").innerText;
-    const title = document.getElementById("res-title").innerText;
-    const shareText = `【週末の深層心理テスト結果】\n私は『${psy}』でした！\n処方箋デートスポットは「${title}」✨\nみんなの処方箋スポットはどこ？やってみて！\nhttps://ranohiro.github.io/`;
+    const mood = document.getElementById("mood-type").innerText;
+    const title = document.getElementById("spot-title").innerText;
+    const shareText = `週末気分診断やってみたら『${mood}』で、おすすめは「${title}」だった！ここ行ってみたい笑\nhttps://ranohiro.github.io/`;
 
     if (navigator.share) {
       navigator.share({
-        title: "週末の深層心理テスト結果",
+        title: "週末の気分タイプ診断",
         text: shareText,
         url: "https://ranohiro.github.io/"
       }).catch(() => {
@@ -711,7 +575,7 @@
 
   function fallbackCopy(text) {
     navigator.clipboard.writeText(text).then(() => {
-      alert("結果をクリップボードにコピーしました！LINEやSNSに貼り付けて送れます。");
+      alert("結果をコピーしました！LINE等に貼り付けて送れます。");
     }).catch(() => {
       prompt("以下のテキストをコピーしてください:", text);
     });
