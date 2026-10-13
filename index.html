@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>週末のおでかけ気分診断</title>
+  <style>
+    :root {
+      --primary: #4a5568;
+      --accent: #e06c75;
+      --accent-light: #fff0f2;
+      --bg: #f7f8fa;
+      --card-bg: #ffffff;
+      --text: #2d3748;
+      --text-muted: #718096;
+      --radius: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px 16px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 440px;
+      margin: auto;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 32px 24px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 12px;
+      background: var(--accent-light);
+      color: var(--accent);
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      letter-spacing: 0.05em;
+    }
+
+    h1 {
+      font-size: 22px;
+      margin-bottom: 8px;
+      color: #1a202c;
+    }
+
+    p.sub {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 28px;
+    }
+
+    .progress-bar {
+      height: 4px;
+      background: #edf2f7;
+      border-radius: 2px;
+      margin-bottom: 24px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--accent);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    .q-step {
+      font-size: 13px;
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .q-text {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 24px;
+      line-height: 1.5;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .opt-btn {
+      padding: 16px 18px;
+      background: #f8fafc;
+      border: 1.5px solid #edf2f7;
+      border-radius: 12px;
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.5;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .opt-btn:active {
+      transform: scale(0.98);
+      border-color: var(--accent);
+      background: var(--accent-light);
+    }
+
+    .btn-main {
+      width: 100%;
+      padding: 16px;
+      background: #2d3748;
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .btn-main:active {
+      opacity: 0.85;
+    }
+
+    /* 結果画面 */
+    .result-icon {
+      font-size: 44px;
+      margin-bottom: 12px;
+    }
+
+    .result-type {
+      font-size: 13px;
+      color: var(--accent);
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      margin-bottom: 6px;
+    }
+
+    .result-title {
+      font-size: 20px;
+      font-weight: 800;
+      margin-bottom: 14px;
+      line-height: 1.4;
+    }
+
+    .result-desc {
+      font-size: 14px;
+      color: #4a5568;
+      text-align: left;
+      line-height: 1.7;
+      background: #f8fafc;
+      padding: 18px;
+      border-radius: 12px;
+      margin-bottom: 24px;
+    }
+
+    .result-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .tag {
+      font-size: 11px;
+      background: #edf2f7;
+      padding: 3px 8px;
+      border-radius: 6px;
+      color: #718096;
+    }
+
+    .share-box {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .btn-line {
+      background: #06c755;
+      color: white;
+      text-decoration: none;
+      padding: 14px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      display: inline-block;
+    }
+
+    .btn-retry {
+      background: transparent;
+      border: 1px solid #cbd5e0;
+      color: var(--text-muted);
+      padding: 12px;
+      border-radius: 12px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <!-- スタート画面 -->
+  <div id="screen-start" class="card">
+    <span class="badge">WEEKEND DIAGNOSIS</span>
+    <h1>今週末の気分診断</h1>
+    <p class="sub">3つの直感的な質問に答えるだけで、<br>今のあなたの気分にぴったりなスポットが分かります。</p>
+    <button class="btn-main" onclick="startQuiz()">診断をはじめる</button>
+  </div>
+
+  <!-- 質問画面 -->
+  <div id="screen-quiz" class="card hidden">
+    <div class="progress-bar">
+      <div id="progress" class="progress-fill"></div>
+    </div>
+    <div id="q-step" class="q-step">Q1</div>
+    <div id="q-text" class="q-text">質問テキスト</div>
+    <div id="options" class="options"></div>
+  </div>
+
+  <!-- 結果画面 -->
+  <div id="screen-result" class="card hidden">
+    <div id="res-icon" class="result-icon">✨</div>
+    <div id="res-type" class="result-type">タイプ名</div>
+    <div id="res-title" class="result-title">スポット名</div>
+    <div class="result-desc">
+      <div id="res-text">詳細テキスト</div>
+      <div id="res-tags" class="result-tags"></div>
+    </div>
+    <div class="share-box">
+      <button class="btn-main" onclick="copyResult()">この結果を共有する（コピー）</button>
+      <button class="btn-retry" onclick="restart()">もう一度診断する</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const questions = [
+    {
+      text: "今週末、一番満たしたい「気分」はどれに近い？",
+      choices: [
+        { text: "日常を忘れて、とことん贅沢な特別感に浸りたい", type: "movie" },
+        { text: "物語の主人公になったようなスリルや非日常を味わいたい", type: "immersive" },
+        { text: "普段使わない感覚を研ぎ澄まし、深い対話を楽しみたい", type: "dialogue" },
+        { text: "お酒を片手に、遊び心とクリエイティブな時間を楽しみたい", type: "artbar" },
+        { text: "開放的な空の下で、気取らずに美味しいものを食べたい", type: "bbq" }
+      ]
+    },
+    {
+      text: "ふたりで過ごすとき、大事にしたい「距離感」は？",
+      choices: [
+        { text: "ゆったりとした空間で、お互いリラックスできる落ち着き", type: "movie" },
+        { text: "同じハプニングを共有して、自然とテンションが上がる時間", type: "immersive" },
+        { text: "声と気配だけで繋がるような、唯一無二の一体感", type: "dialogue" },
+        { text: "お互いの感性を覗き合いながら、笑い合えるカジュアルさ", type: "artbar" },
+        { text: "飾らない素の表情で、風を感じながらくつろぐ居心地の良さ", type: "bbq" }
+      ]
+    },
+    {
+      text: "もし魔法の扉を開けるなら、その先にあってほしい景色は？",
+      choices: [
+        { text: "ふかふかのソファと最高峰の音響が広がるプライベート空間", type: "movie" },
+        { text: "別の時代や事件の現場に迷い込んだような異空間", type: "immersive" },
+        { text: "完全な静寂と暗闇の中で、五感だけが冴えわたる未知の世界", type: "dialogue" },
+        { text: "絵の具の香りとワイングラスが並ぶ、おしゃれなアトリエ", type: "artbar" },
+        { text: "水辺の風が心地よく、炭火のいい香りが漂うウッドデッキ", type: "bbq" }
+      ]
+    }
+  ];
+
+  const results = {
+    movie: {
+      icon: "🎬",
+      type: "【プレミアム・ラグジュアリー派】",
+      title: "109シネマズプレミアム新宿",
+      desc: "今のあなたには、最高峰の音響と全席プレミアムシートで味わう大人の映画デートがぴったり。坂本龍一氏監修の音響空間と上映前の専用ラウンジで、映画館の概念を超える特別な時間が過ごせます。",
+      tags: ["#全席プレミアム", "#ラウンジ利用可", "#坂本龍一音響監修", "#新宿"]
+    },
+    immersive: {
+      icon: "🎭",
+      type: "【ネクストジェネレーション・アクティブ派】",
+      title: "イマーシブ・フォート東京",
+      desc: "今の気分は完全没入型の次世代エンタメ！物語の登場人物として施設内を歩き回り、サスペンスやミステリーを肌で体験。2人で協力しながらハラハラを共有できる、忘れられない体験型デートになります。",
+      tags: ["#2024年オープン", "#没入型シアター", "#非日常", "#お台場"]
+    },
+    dialogue: {
+      icon: "🕯️",
+      type: "【深層感覚・ディープコネクト派】",
+      title: "ダイアログ・イン・ザ・ダーク",
+      desc: "光を完全に遮断した純度100%の暗闇の中で、手探りと声だけで進む体験。普段意識しない五感が研ぎ澄まされ、相手との会話や存在感が驚くほど鮮明に感じられる、深い対話が生まれるデートです。",
+      tags: ["#完全な暗闇", "#五感の再発見", "#対話が深まる", "#竹芝"]
+    },
+    artbar: {
+      icon: "🎨",
+      type: "【クリエイティブ・チルアウト派】",
+      title: "Artbar Tokyo",
+      desc: "ワインやお酒を片手に、キャンバスに向かって自由にアートを楽しむ大人のアトリエ体験。絵心がなくてもインストラクターが優しくサポート。お互いの作品を持ち帰れる思い出作りにもぴったりです。",
+      tags: ["#ワイン飲み放題", "#アート体験", "#手ぶらOK", "#代官山"]
+    },
+    bbq: {
+      icon: "🍖",
+      type: "【オープンエア・リフレッシュ派】",
+      title: "豊洲ぐるり公園 手ぶらBBQ",
+      desc: "海風を感じるウォーターフロントで、準備・片付け不要の手ぶらバーベキュー。都会のパノラマビューを眺めながら、リラックスした開放的な空間で美味しいお肉と会話を楽しめます。",
+      tags: ["#手ぶらOK", "#海沿いロケーション", "#開放感", "#豊洲"]
+    }
+  };
+
+  let currentQ = 0;
+  let scores = { movie: 0, immersive: 0, dialogue: 0, artbar: 0, bbq: 0 };
+
+  function startQuiz() {
+    document.getElementById("screen-start").classList.add("hidden");
+    document.getElementById("screen-quiz").classList.remove("hidden");
+    showQuestion();
+  }
+
+  function showQuestion() {
+    const q = questions[currentQ];
+    document.getElementById("q-step").innerText = `QUESTION ${currentQ + 1} / ${questions.length}`;
+    document.getElementById("q-text").innerText = q.text;
+    document.getElementById("progress").style.width = `${((currentQ) / questions.length) * 100}%`;
+
+    const optionsContainer = document.getElementById("options");
+    optionsContainer.innerHTML = "";
+
+    q.choices.forEach(c => {
+      const btn = document.createElement("button");
+      btn.className = "opt-btn";
+      btn.innerText = c.text;
+      btn.onclick = () => selectChoice(c.type);
+      optionsContainer.appendChild(btn);
+    });
+  }
+
+  function selectChoice(type) {
+    scores[type]++;
+    currentQ++;
+    if (currentQ < questions.length) {
+      showQuestion();
+    } else {
+      showResult();
+    }
+  }
+
+  function showResult() {
+    document.getElementById("progress").style.width = "100%";
+    document.getElementById("screen-quiz").classList.add("hidden");
+    document.getElementById("screen-result").classList.remove("hidden");
+
+    let topType = "movie";
+    let maxScore = -1;
+    for (const [key, val] of Object.entries(scores)) {
+      if (val > maxScore) {
+        maxScore = val;
+        topType = key;
+      }
+    }
+
+    const res = results[topType];
+    document.getElementById("res-icon").innerText = res.icon;
+    document.getElementById("res-type").innerText = res.type;
+    document.getElementById("res-title").innerText = res.title;
+    document.getElementById("res-text").innerText = res.desc;
+
+    const tagsContainer = document.getElementById("res-tags");
+    tagsContainer.innerHTML = "";
+    res.tags.forEach(t => {
+      const span = document.createElement("span");
+      span.className = "tag";
+      span.innerText = t;
+      tagsContainer.appendChild(span);
+    });
+  }
+
+  function copyResult() {
+    const title = document.getElementById("res-title").innerText;
+    const text = `おでかけ診断やってみたら「${title}」が出たよ！ここどう？`;
+    navigator.clipboard.writeText(text).then(() => {
+      alert("メッセージをコピーしました！LINE等にそのまま貼り付けて送れます。");
+    }).catch(() => {
+      alert(text);
+    });
+  }
+
+  function restart() {
+    currentQ = 0;
+    scores = { movie: 0, immersive: 0, dialogue: 0, artbar: 0, bbq: 0 };
+    document.getElementById("screen-result").classList.add("hidden");
+    document.getElementById("screen-start").classList.remove("hidden");
+  }
+</script>
+</body>
+</html>
